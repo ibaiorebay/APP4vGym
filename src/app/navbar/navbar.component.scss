@@ -1,0 +1,23 @@
+nav.navbar {
+    .container-fluid {
+      background-color: #ccc;
+      padding: 10px;
+      display: flex;
+      align-items: center; // Centra verticalmente
+  
+      .navbar-brand {
+        margin-right: auto; // Empuja el logo a la izquierda
+        img {
+          max-height: 100px;
+        }
+      }
+  
+      h1 {
+        margin-bottom: 0;
+        margin-left: auto; // Empuja el texto a la derecha
+        flex-grow: 1; // Permite que el texto se expanda para ocupar el espacio central
+        text-align: center; // Centra el texto dentro de su propio espacio
+        color: red;
+      }
+    }
+  }
