@@ -1,42 +1,24 @@
 import { Component } from '@angular/core';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CalendarMonthModule, CalendarEvent, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { startOfDay } from 'date-fns';
-
-export function adapterFactoryFn(): DateAdapter {
-  return adapterFactory();
-}
-
+import { DateService } from '../services/date.service';
 @Component({
-  selector: 'app-my-calendar',
-  standalone: true,
-  imports: [
-    CommonModule,
-    CalendarMonthModule // Importa el módulo de la vista SIN forRoot()
-  ],
+  selector: 'app-calendar',
+  imports: [CommonModule, MatDatepickerModule, MatInputModule, MatFormFieldModule, MatNativeDateModule, FormsModule],
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
-  providers: [ // Configura el DateAdapter aquí
-    {
-      provide: DateAdapter,
-      useFactory: adapterFactoryFn,
-    },
-  ],
+  styleUrls: ['./calendar.component.scss'], // Use styleUrls (plural)
 })
-export class MyCalendarComponent {
-  viewDate: Date = new Date(); // Inicializa viewDate aquí!!!
-  events: CalendarEvent[] = [
-    {
-      start: startOfDay(new Date()),
-      title: 'Un evento',
-    },
-  ];
+export class CalendarComponent {
+  selectedDate: Date | null = null;
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
-    console.log('Day clicked', date, events);
-  }
-  handleEvent(action: string, event: CalendarEvent): void {
-    console.log('Event', action, event);
+  constructor(private dateService: DateService) { } // Inyectamos el servicio
+
+  onDateChange(event: any) {
+    this.selectedDate = event.value;
+    this.dateService.setSelectedDate(this.selectedDate); // Usamos el servicio
   }
 }
