@@ -4,13 +4,15 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { DateService } from './services/date.service';
 import { Subscription } from 'rxjs';
+import { ActivitySelectorComponent } from "./activity-selector/activity-selector.component";
 
 @Component({
   standalone: true,
   selector: 'app-root',
   imports: [
     RouterOutlet, NavbarComponent,
-    AppComponent, CalendarComponent
+    AppComponent, CalendarComponent,
+    ActivitySelectorComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

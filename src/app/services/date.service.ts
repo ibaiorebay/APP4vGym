@@ -9,7 +9,11 @@ export class DateService {
   private selectedDateSource = new BehaviorSubject<Date | null>(null);
   selectedDate$ = this.selectedDateSource.asObservable(); // Observable para suscribirse
 
-  setSelectedDate(date: Date | null) {
+  public setSelectedDate(date: Date | null) {
     this.selectedDateSource.next(date);
+  }
+
+  getSelectedDate() {
+    return this.selectedDateSource.value;
   }
 }
