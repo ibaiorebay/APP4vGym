@@ -1,0 +1,36 @@
+.slot-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .free-slot {
+    background-color: green;
+    color: white;
+  }
+  
+  .activity-slot {
+    background-color: #f4f4f4;
+  }
+  
+  .free-content {
+    text-align: center;
+  }
+  
+  .activity-content {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .monitors {
+    margin-top: 5px;
+  }
+  
+  .actions {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+  }
+  

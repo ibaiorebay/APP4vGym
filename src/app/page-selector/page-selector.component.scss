@@ -1,0 +1,57 @@
+/* Líneas en la parte superior */
+.page-selector-lines {
+    display: flex;
+    width: 100vw;
+    height: 7px;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-bottom: 10px;
+}
+
+.page-selector-lines .line {
+    width: 50%;
+    height: 100%;
+}
+
+.page-selector-lines .left {
+    background-color: rgb(209, 91, 91);
+}
+
+.page-selector-lines .right {
+    background-color: rgb(107, 107, 107);
+}
+
+/* Contenedor principal */
+section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+
+/* Iconos */
+#icoAct, #icoMon {
+    width: 70px;
+    height: 70px;
+    margin: 0 40px; /* Aumentado el margen horizontal */
+}
+
+/* Estilo para los textos */
+h2 {
+    margin: 0 40px;
+    flex: 1;
+    text-align: center;
+    font-size: 2rem; /* Texto más grande */
+    font-weight: bold; /* Acentúa el texto */
+}
+
+/* Colores dinámicos para los textos */
+.text-red {
+    color: rgb(209, 91, 91);
+}
+
+.text-grey {
+    color: rgb(107, 107, 107);
+}
+

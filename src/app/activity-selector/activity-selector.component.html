@@ -3,3 +3,11 @@
     <h1>{{getDate()}}</h1>
     <img src="rightArrow.png" (click)="incrementDate()">
 </section>
+<h4>10:00<br>11:30</h4>
+<div class="schedule">
+    <app-activity
+      *ngFor="let slot of activitySlots"
+      [slot]="slot">
+    </app-activity>
+  </div>
+  

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
 import { DateService } from '../services/date.service';
+import { ActivityComponent } from '../activity/activity.component';
 
 @Component({
   selector: 'app-activity-selector',
-  imports: [],
+  imports: [ActivityComponent],
   templateUrl: './activity-selector.component.html',
   styleUrl: './activity-selector.component.scss'
 })
 export class ActivitySelectorComponent {
   constructor(private dateService: DateService) {}
   formattedDate: string = '';
+  activitySlots: ActivityComponent[] = [];
 
   getDate() { 
     let date: Date | null;
@@ -35,6 +37,10 @@ export class ActivitySelectorComponent {
 
     // Establecer la fecha inicial
     this.updateFormattedDate(this.dateService.getSelectedDate());
+
+    //this.activityService.getActivitySlots().subscribe((data) => {
+    //  this.activitySlots = data;
+    //});
   }
 
   updateFormattedDate(date: Date | null): void {

@@ -5,6 +5,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { DateService } from './services/date.service';
 import { Subscription } from 'rxjs';
 import { ActivitySelectorComponent } from "./activity-selector/activity-selector.component";
+import { PageSelectorComponent } from './page-selector/page-selector.component';
 
 @Component({
   standalone: true,
@@ -12,7 +13,7 @@ import { ActivitySelectorComponent } from "./activity-selector/activity-selector
   imports: [
     RouterOutlet, NavbarComponent,
     AppComponent, CalendarComponent,
-    ActivitySelectorComponent
+    ActivitySelectorComponent, PageSelectorComponent
 ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
