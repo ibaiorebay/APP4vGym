@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component  } from '@angular/core';
 import { DateService } from '../services/date.service';
 import { ActivityComponent } from '../activity/activity.component';
 

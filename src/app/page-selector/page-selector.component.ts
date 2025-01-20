@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-page-selector',
@@ -7,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrl: './page-selector.component.scss'
 })
 export class PageSelectorComponent {
+  @Output() activitySelected = new EventEmitter<void>();
+  @Output() monitorSelected = new EventEmitter<void>();
+
+  showActivities() {
+    this.activitySelected.emit();
+  }
+
+  showMonitors() {
+    this.monitorSelected.emit();
+  }
 
 }

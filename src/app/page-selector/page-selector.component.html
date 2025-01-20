@@ -3,9 +3,15 @@
     <div class="line right"></div>
 </div>
 <section>
-    <img id="icoAct" src="icoActRed.png">
-    <h2 class="text-red">Actividades</h2>
-    <img id="icoMon" src="icoMonGrey.png">
-    <h2 class="text-grey">Monitores</h2>
+    <div (click)="showActivities()">
+        <img id="icoAct" src="icoActRed.png">
+        <h2 class="text-red">Actividades</h2>
+    </div>
+    <div (click)="showMonitors()">
+        <img id="icoMon" src="icoMonGrey.png">
+        <h2 class="text-grey">Monitores</h2>
+    </div>
+    
+    
 </section>
     

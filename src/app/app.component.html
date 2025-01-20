@@ -1,7 +1,14 @@
 <app-navbar></app-navbar>
 <section>
-    <app-calendar></app-calendar>
-    <app-activity-selector></app-activity-selector>
+    <section *ngIf="showActivities">
+        <app-calendar></app-calendar>
+        <app-activity-selector></app-activity-selector>
+    </section>
+    <section *ngIf="showMonitors">
+        <app-carrousel></app-carrousel>
+    </section>
+    
 </section>
 <div style="height: 2em;"></div>
-<app-page-selector></app-page-selector>
+<app-page-selector (activitySelected)="onShowActivities()"
+(monitorSelected)="onShowMonitors()"></app-page-selector>
