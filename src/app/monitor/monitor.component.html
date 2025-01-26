@@ -1,0 +1,10 @@
+<div class="monitor-card">
+  <div class="actions">
+    <button  (click)="handleEdit()"><img class="img-modify" src="icoPen.png" alt="modificar"></button>
+    <button  (click)="handleDelete()"><img class="img-modify" src="icoTrash.png" alt="eliminar"></button>
+  </div>
+  <img src="icoMonRed.png" alt="Monitor Image" />
+  <h4>{{ monitor.name }}</h4>
+  <p>{{ monitor.mail }}</p>
+  <p>{{ monitor.phoneNumber }}</p>
+</div>

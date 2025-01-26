@@ -1,28 +1,62 @@
 <section>
-    <div class="content-section implementation carousel-demo">
-        <div class="card">
-            <p-carousel [value]="images" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
-            [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
-                <ng-template let-image pTemplate="item">
-                  <div class="item card">
-                    <img src="{{image.picture}}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">{{image.random}}</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                  </div>
-                </ng-template>
-            </p-carousel>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+      </div>
+      <div class="col-6">
+        <div class="input-group mb-3">
+          <input
+            type="text"
+            placeholder="Search monitors..."
+            [(ngModel)]="searchValue"
+          />
+          
         </div>
       </div>
-    <!--
-    <img src="leftArrow.png" (click)="getPrev()">
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner" role="listbox">
-            <img src="{{ getSlide() }}" alt="slide" />
-        </div>
+      <div class="col">
+        <button class="add-btn" (click)="showAddMonitorModal()"> <img src="image.png" alt="Add Icon"></button>
+      </div>
     </div>
-    <img src="rightArrow.png" (click)="getNext()">
-    -->
+  </div>
+  <div class="content-section implementation carousel-demo">
+    <div class="container">
+        <p-carousel [value]="filteredMonitors" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
+        [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+        <ng-template let-monitor pTemplate="item">
+          <div class="monitor-card">
+            <app-monitor
+              [monitor]="monitor"
+              (edit)="editMonitor($event)"
+              (delete)="deleteMonitor($event)"
+            ></app-monitor>
+          </div>
+        </ng-template>
+        </p-carousel>
+    </div>
+  </div>
 </section>
+
+<!-- Modal -->
+<p-dialog header="Agregar Monitor" [(visible)]="showAddMonitor">
+  <div class="modal-form">
+    <input
+      type="text"
+      placeholder="Nombre"
+      [(ngModel)]="newMonitor.name"
+    />
+    <input
+      type="email"
+      placeholder="Correo Electrónico"
+      [(ngModel)]="newMonitor.mail"
+    />
+    <input
+      type="tel"
+      placeholder="Teléfono"
+      [(ngModel)]="newMonitor.phoneNumber"
+    />
+    <div class="form-actions">
+      <button class="accept-btn" (click)="addMonitor()">Aceptar</button>
+      <button class="cancel-btn" (click)="cancelAddMonitor()">Cancelar</button>
+    </div>
+  </div>
+</p-dialog>

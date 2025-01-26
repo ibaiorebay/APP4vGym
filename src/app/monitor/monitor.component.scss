@@ -1,0 +1,38 @@
+/* Monitor Card */
+.monitor-card {
+    background-color: #f7f7f7; /* Light gray */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    width: 300px; /* Fixed width for consistent alignment */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  /* Circular Placeholder Image */
+  .monitor-card img {
+    width: 100px;
+    height: 100px;
+  }
+  .monitor-card .img-modify {
+    width: 50px;
+    height: 50px;
+  }
+  /* Name Styling */
+  .monitor-card h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Email and Phone */
+  .monitor-card p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
