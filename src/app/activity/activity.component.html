@@ -1,26 +1,26 @@
 <div [ngClass]="{ 'free-slot': slot.isFree, 'activity-slot': !slot.isFree }" class="slot-container">
-    <ng-container *ngIf="slot.isFree; else activityContent">
-      <div class="free-content">
-        <div class="free-text">FREE</div>
-        <button class="add-button">+</button>
+  <ng-container *ngIf="slot.isFree; else activityContent">
+    <div class="free-content">
+      <div class="free-text">FREE</div>
+      <button class="add-button">+</button>
+    </div>
+  </ng-container>
+
+  <ng-template #activityContent>
+    <div class="activity-content">
+      <div class="activity-header">
+        <span>{{ slot.activity?.name }}</span>
       </div>
-    </ng-container>
-    <ng-template #activityContent>
-      <div class="activity-content">
-        <div class="activity-header">
-          <span>{{ slot.activity?.name }}</span>
-          <img [src]="slot.activity?.icon" alt="Activity Icon" />
-        </div>
-        <div class="monitors">
-          <div *ngFor="let monitor of slot.activity?.monitors" class="monitor">
-            {{ monitor.name }}
-          </div>
-        </div>
-        <div class="actions">
-          <button class="edit-button">✏️</button>
-          <button class="delete-button">🗑️</button>
+      <div class="monitors">
+        <div *ngFor="let monitor of slot.activity?.monitors" class="monitor">
+          <img [src]="monitor.photo" alt="{{ monitor.name }}" class="monitor-photo" />
+          {{ monitor.name }}
         </div>
       </div>
-    </ng-template>
-  </div>
-  
+      <div class="actions">
+        <button class="edit-button">✏️</button>
+        <button class="delete-button">🗑️</button>
+      </div>
+    </div>
+  </ng-template>
+</div>
