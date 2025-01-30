@@ -1,4 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { CarouselModule } from 'primeng/carousel';
@@ -6,87 +8,80 @@ import { DialogModule } from 'primeng/dialog';
 import { MonitorComponent } from '../monitor/monitor.component';
 import { FormsModule } from '@angular/forms';
 import { MonitorComponentInterface } from '../interfaces/monitor-component';
+import { MonitorService } from '../services/monitor.service';
+import { MonitorDialogComponent } from '../monitor-dialog/monitor-dialog.component';
 
 @Component({
   selector: 'app-carrousel',
-  imports: [ButtonModule, CarouselModule, DialogModule, MonitorComponent, FormsModule, CommonModule],
+  standalone: true,
+  imports: [ButtonModule, CarouselModule, DialogModule, MonitorComponent, FormsModule, CommonModule, MatDialogModule, MatButtonModule],
   templateUrl: './carrousel.component.html',
   styleUrls: ['./carrousel.component.scss']
 })
-export class CarrouselComponent {
-  responsiveOptions;
+export class CarrouselComponent implements OnInit {
+  monitors: MonitorComponentInterface[] = [];
+  searchValue = '';
+  showAddMonitor = false;
+  monitorToEdit: MonitorComponentInterface | null = null;
+  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'default.jpg' };
 
-  constructor() {
-    this.responsiveOptions = [{
-      breakpoint: '1024px',
-      numVisible: 1,
-      numScroll: 3
-    }];
+  constructor(private monitorService: MonitorService, public dialog: MatDialog) {}
+
+  ngOnInit() {
+    this.loadMonitors();
   }
 
-  monitors: MonitorComponentInterface[] = [
-    { id: 1, name: 'Miguel Goyena', email: 'miguel.goyena@example.com', phone: '643231413', photo: 'miguel.jpg' },
-    { id: 2, name: 'Lourdes Domínguez', email: 'ldominguez@gmail.com', phone: '623231413', photo: 'lourdes.jpg' },
-    { id: 3, name: 'Joaquín Rodríguez', email: 'jrodrig@hotmail.es', phone: '643231413', photo: 'joaquin.jpg' },
-    { id: 4, name: 'Rodríguez', email: 'jrodrig@hotmail.es', phone: '633231413', photo: 'default.jpg' }
-  ];
-
-  monitorToEdit: MonitorComponentInterface | null = null; // Para almacenar el monitor que se va a editar
-  searchValue = '';  // Valor del input de búsqueda
+  loadMonitors() {
+    this.monitorService.getMonitors().subscribe((data) => {
+      this.monitors = data;
+    });
+  }
 
   get filteredMonitors() {
     return this.monitors.filter((monitor) =>
       monitor.name.toLowerCase().includes(this.searchValue.toLowerCase()) ||
       monitor.email.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-      monitor.phone.toString().includes(this.searchValue) ||
-      monitor.id.toString().includes(this.searchValue)
+      monitor.phone.toString().includes(this.searchValue)
     );
   }
 
-  showAddMonitor = false;
-  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'default.jpg' };
+  showAddMonitorModal(monitor?: MonitorComponentInterface) {
+    const dialogRef = this.dialog.open(MonitorDialogComponent, {
+      data: { monitor: monitor },
+      panelClass: 'custom-dialog',
+      autoFocus: false
+    });
 
-  showAddMonitorModal() {
-    this.monitorToEdit = null;  // Resetear edición anterior
-    this.newMonitor = { id: this.getNextMonitorId(), name: '', email: '', phone: '', photo: 'default.jpg' };
-    this.showAddMonitor = true;
-  }
-
-  addMonitor() {
-    if (this.newMonitor.name && this.newMonitor.email && this.newMonitor.phone) {
-      if (this.monitorToEdit) {
-        // Si estamos editando, actualizamos el monitor existente
-        const index = this.monitors.findIndex(m => m.id === this.monitorToEdit!.id);
-        if (index !== -1) {
-          this.monitors[index] = { ...this.newMonitor };
-        }
-      } else {
-        // Si no estamos editando, añadimos un nuevo monitor
-        this.monitors.push({ ...this.newMonitor });
-      }
-      this.cancelAddMonitor();
+    if (monitor) {
+      dialogRef.componentInstance.title = 'Actualizar Monitor';  // Title for updating
+    } else {
+      dialogRef.componentInstance.title = 'Añadir Monitor';  // Title for adding
     }
-  }
 
-  cancelAddMonitor() {
-    this.newMonitor = { id: 0, name: '', email: '', phone: '', photo: 'default.jpg' };
-    this.showAddMonitor = false;
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if (monitor) {
+          // Update monitor
+          this.monitorService.updateMonitor(monitor.id, result).subscribe(() => {
+            this.loadMonitors();
+          });
+        } else {
+          // Create new monitor
+          this.monitorService.createMonitor(result).subscribe(() => {
+            this.loadMonitors();
+          });
+        }
+      }
+    });
   }
 
   editMonitor(monitor: MonitorComponentInterface) {
-    this.monitorToEdit = monitor;
-    this.newMonitor = { ...monitor }; // Rellenar el modal con los datos del monitor
-    this.showAddMonitor = true;
+    this.showAddMonitorModal(monitor);
   }
 
   deleteMonitor(monitor: MonitorComponentInterface) {
-    const index = this.monitors.findIndex(m => m.id === monitor.id);
-    if (index !== -1) {
-      this.monitors.splice(index, 1); // Eliminar el monitor del array
-    }
-  }
-
-  private getNextMonitorId(): number {
-    return this.monitors.length > 0 ? Math.max(...this.monitors.map(m => m.id)) + 1 : 1;
+    this.monitorService.deleteMonitor(monitor.id).subscribe(() => {
+      this.loadMonitors();
+    });
   }
 }

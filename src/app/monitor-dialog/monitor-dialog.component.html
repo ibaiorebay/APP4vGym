@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+<div mat-dialog-content>
+  <form>
+    <input type="text" placeholder="Nombre" [(ngModel)]="newMonitor.name" name="name" />
+    <input type="email" placeholder="Correo Electrónico" [(ngModel)]="newMonitor.email" name="email" />
+    <input type="tel" placeholder="Teléfono" [(ngModel)]="newMonitor.phone" name="phone" />
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button (click)="save()">Aceptar</button>
+</div>

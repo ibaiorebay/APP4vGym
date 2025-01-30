@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CarrouselComponent } from '../carrousel/carrousel.component';
+import { MonitorDialogComponent } from './monitor-dialog.component';
 
-describe('CarrouselComponent', () => {
-  let component: CarrouselComponent;
-  let fixture: ComponentFixture<CarrouselComponent>;
+describe('MonitorDialogComponent', () => {
+  let component: MonitorDialogComponent;
+  let fixture: ComponentFixture<MonitorDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CarrouselComponent]
+      imports: [MonitorDialogComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CarrouselComponent);
+    fixture = TestBed.createComponent(MonitorDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

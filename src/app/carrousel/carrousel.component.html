@@ -1,62 +1,29 @@
 <section>
   <div class="container-fluid">
     <div class="row">
-      <div class="col">
-      </div>
       <div class="col-6">
         <div class="input-group mb-3">
-          <input
-            type="text"
-            placeholder="Search monitors..."
-            [(ngModel)]="searchValue"
-          />
-          
+          <input type="text" placeholder="Search monitors..." [(ngModel)]="searchValue" />
         </div>
       </div>
       <div class="col">
-        <button class="add-btn" (click)="showAddMonitorModal()"> <img src="image.png" alt="Add Icon"></button>
+        <button class="add-btn" (click)="showAddMonitorModal()">
+          <img src="image.png" alt="Add Icon">
+        </button>
       </div>
     </div>
   </div>
+
   <div class="content-section implementation carousel-demo">
     <div class="container">
-        <p-carousel [value]="filteredMonitors" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
-        [circular]="true" [autoplayInterval]="0" [responsiveOptions]="responsiveOptions">
+      <p-carousel [value]="filteredMonitors" styleClass="custom-carousel" [numVisible]="3" [numScroll]="1"
+        [circular]="true" [autoplayInterval]="0">
         <ng-template let-monitor pTemplate="item">
           <div class="monitor-card">
-            <app-monitor
-              [monitor]="monitor"
-              (edit)="editMonitor($event)"
-              (delete)="deleteMonitor($event)"
-            ></app-monitor>
+            <app-monitor [monitor]="monitor" (edit)="editMonitor($event)" (delete)="deleteMonitor($event)"></app-monitor>
           </div>
         </ng-template>
-        </p-carousel>
+      </p-carousel>
     </div>
   </div>
 </section>
-
-<!-- Modal -->
-<p-dialog header="Agregar Monitor" [(visible)]="showAddMonitor">
-  <div class="modal-form">
-    <input
-      type="text"
-      placeholder="Nombre"
-      [(ngModel)]="newMonitor.name"
-    />
-    <input
-      type="email"
-      placeholder="Correo Electrónico"
-      [(ngModel)]="newMonitor.email"
-    />
-    <input
-      type="tel"
-      placeholder="Teléfono"
-      [(ngModel)]="newMonitor.phone"
-    />
-    <div class="form-actions">
-      <button class="accept-btn" (click)="addMonitor()">Aceptar</button>
-      <button class="cancel-btn" (click)="cancelAddMonitor()">Cancelar</button>
-    </div>
-  </div>
-</p-dialog>
