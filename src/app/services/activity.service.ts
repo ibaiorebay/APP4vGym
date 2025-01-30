@@ -30,4 +30,10 @@ export class activityService {
   deleteActivity(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/activities/${id}`);
   }
+
+  
+  // Método PUT
+  updateActivity(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/activities/${id}`, data);
+  }
 }

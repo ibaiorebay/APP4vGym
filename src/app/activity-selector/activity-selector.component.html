@@ -10,3 +10,28 @@
     [slot]="slot">
   </app-activity>
 </div>
+
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">×</span>
+    <h2>{{ isEditing ? 'Editar Actividad' : 'Crear Actividad' }}</h2>
+
+    <!-- Dropdown de tipo de actividad -->
+    <label for="activityType">Tipo de Actividad</label>
+    <select id="activityType" [(ngModel)]="selectedActivityType" (change)="onActivityTypeChange()">
+      <option *ngFor="let activity of activityTypes" [value]="activity.id">{{ activity.name }}</option>
+    </select>
+
+    <!-- Dropdowns para los monitores -->
+    <div *ngFor="let monitor of monitorDropdowns; let i = index">
+      <label for="monitor-{{i}}">Monitor {{i + 1}}</label>
+      <select id="monitor-{{i}}" [(ngModel)]="selectedMonitors[i]">
+        <option *ngFor="let monitor of availableMonitors" [value]="monitor.id">{{ monitor.name }}</option>
+      </select>
+    </div>
+
+    <button (click)="saveActivity()">{{ isEditing ? 'Actualizar' : 'Crear' }}</button>
+    <button (click)="cancel()">Cancelar</button>
+  </div>
+</div>
+
