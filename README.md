@@ -7,6 +7,12 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
+npm update
+npm install primeng @primeng/themes
+ng add @angular/material
+```
+
+```bash
 ng serve
 ```
 
