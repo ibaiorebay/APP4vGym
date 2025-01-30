@@ -1,3 +1,4 @@
+<div class="hour">{{ slot.activity?.dateStart?.slice(11, 16)}} - {{ slot.activity?.dateEnd?.slice(11, 16) }}</div>
 <div [ngClass]="{ 'free-slot': slot.isFree, 'activity-slot': !slot.isFree }" class="slot-container">
   <ng-container *ngIf="slot.isFree; else activityContent">
     <div class="free-content">
@@ -24,3 +25,4 @@
     </div>
   </ng-template>
 </div>
+
