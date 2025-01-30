@@ -1,12 +1,23 @@
-<h2 mat-dialog-title>{{ title }}</h2>
-<div mat-dialog-content>
-  <form>
-    <input type="text" placeholder="Nombre" [(ngModel)]="newMonitor.name" name="name" />
-    <input type="email" placeholder="Correo Electrónico" [(ngModel)]="newMonitor.email" name="email" />
-    <input type="tel" placeholder="Teléfono" [(ngModel)]="newMonitor.phone" name="phone" />
-  </form>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="cancel()">Cancelar</button>
-  <button mat-button (click)="save()">Aceptar</button>
+<div class="dialog-container">
+    <h1 mat-dialog-title class="dialog-title">{{ title }}</h1>
+
+    <div mat-dialog-content class="dialog-content">
+        <!-- Monitor Image -->
+        <div class="monitor-image-container">
+        <img src="icoMonRed.png" alt="Monitor Photo" class="monitor-image" />
+        </div>
+        
+        <!-- Form Inputs -->
+        <div class="form-inputs">
+        <input type="text" [(ngModel)]="newMonitor.name" placeholder="Name" class="input-field" />
+        <input type="email" [(ngModel)]="newMonitor.email" placeholder="Email" class="input-field" />
+        <input type="tel" [(ngModel)]="newMonitor.phone" placeholder="Phone" class="input-field" />
+        </div>
+    </div>
+
+    <!-- Buttons -->
+    <div mat-dialog-actions class="dialog-actions">
+        <button mat-button class="cancel-btn" (click)="save()">Aceptar</button>
+        <button mat-button class="accept-btn" (click)="cancel()">Cancelar</button>
+    </div>
 </div>

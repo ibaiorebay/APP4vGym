@@ -23,9 +23,9 @@ export class CarrouselComponent implements OnInit {
   searchValue = '';
   showAddMonitor = false;
   monitorToEdit: MonitorComponentInterface | null = null;
-  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'default.jpg' };
+  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'icoMonRed.png' };
 
-  constructor(private monitorService: MonitorService, public dialog: MatDialog) {}
+  constructor(private monitorService: MonitorService, public dialog: MatDialog, private cdRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadMonitors();
@@ -34,15 +34,25 @@ export class CarrouselComponent implements OnInit {
   loadMonitors() {
     this.monitorService.getMonitors().subscribe((data) => {
       this.monitors = data;
+      console.log('Loaded Monitors:', this.monitors);
     });
   }
 
   get filteredMonitors() {
-    return this.monitors.filter((monitor) =>
+    // Log only when searchValue actually changes
+    if (this.searchValue.trim().length === 0) {
+      console.log('Search is empty, returning all monitors');
+      return this.monitors;
+    }
+  
+    console.log('Filtering monitors with search value:', this.searchValue);
+    const filtered = this.monitors.filter((monitor) =>
       monitor.name.toLowerCase().includes(this.searchValue.toLowerCase()) ||
       monitor.email.toLowerCase().includes(this.searchValue.toLowerCase()) ||
-      monitor.phone.toString().includes(this.searchValue)
+      String(monitor.phone).includes(this.searchValue)
     );
+    console.log('Filtered monitors:', filtered);
+    return filtered;
   }
 
   showAddMonitorModal(monitor?: MonitorComponentInterface) {

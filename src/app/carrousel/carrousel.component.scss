@@ -1,3 +1,4 @@
+
 input {
     flex: 1;
     padding: 0.5rem 1rem;
@@ -17,29 +18,31 @@ input {
 .container {
     margin-left: 10%;
 }
+.custom-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;  /* Or any specific max-width you'd like */
+  margin: 0 auto;
+}
 
-.modal-form {
-  input {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-  }
+.monitor-card {
+  max-width: 250px;  /* Set the fixed width for each item */
+  margin: 0 10px;    /* Add spacing between items */
+}
 
-  .form-actions {
-    button {
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-    }
+/* Make sure the carousel items are aligned properly */
+.custom-carousel .p-carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .btn-success {
-      background-color: #28a745;
-      color: white;
-    }
-
-    .btn-secondary {
-      background-color: #6c757d;
-      color: white;
-    }
-  }
+/* Optional: Ensure items inside the carousel don't resize inappropriately */
+.custom-carousel .monitor-card {
+  width: 100%;  /* Or set a fixed width for each item */
+  max-width: 200px;  /* Example of fixed width for each item */
+  margin: 0 10px;  /* Add some spacing between items */
 }

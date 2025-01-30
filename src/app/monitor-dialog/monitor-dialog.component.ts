@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrls: ['./monitor-dialog.component.scss']
 })
 export class MonitorDialogComponent {
-  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'default.jpg' };
+  newMonitor: MonitorComponentInterface = { id: 0, name: '', email: '', phone: '', photo: 'icoMonRed.png' };
   @Input() title: string = 'Agregar Monitor';
   constructor(
     public dialogRef: MatDialogRef<MonitorDialogComponent>,
