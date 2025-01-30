@@ -2,7 +2,7 @@
     border: 1px solid #ccc;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
     align-items: center;
   }
   
@@ -22,6 +22,7 @@
   .activity-content {
     display: flex;
     flex-direction: column;
+    margin-left: 10px;
   }
   
   .monitors {
@@ -33,4 +34,4 @@
     display: flex;
     justify-content: space-between;
   }
-  
+
