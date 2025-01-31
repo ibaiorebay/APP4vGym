@@ -6,9 +6,11 @@
 
 <div class="schedule">
   <app-activity
-    *ngFor="let slot of activitySlots"
-    [slot]="slot">
-  </app-activity>
+  *ngFor="let slot of activitySlots"
+  [slot]="slot"
+  (editActivity)="openModalForEditing($event)"
+  (deleteActivity)="deleteActivity($event)">
+</app-activity>
 </div>
 
 <div *ngIf="isModalOpen" class="modal">

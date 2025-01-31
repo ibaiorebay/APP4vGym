@@ -67,6 +67,14 @@ export class ActivitySelectorComponent implements OnInit {
     this.isModalOpen = false;
   }
 
+  deleteActivity(activityId: number) {
+    if (confirm('¿Estás seguro de que deseas eliminar esta actividad?')) {
+      this.activityService.deleteActivity(activityId).subscribe(() => {
+        this.loadActivitySlots(this.dateService.getSelectedDate()); // Recargar actividades después de eliminar
+      });
+    }
+  }
+
   onActivityTypeChange() {
     if (this.selectedActivityType) {
       this.monitorService.getMonitors().subscribe(data => {
