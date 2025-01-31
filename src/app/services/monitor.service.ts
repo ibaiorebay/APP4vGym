@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class MonitorService {
 
-  private apiUrl = 'http://localhost:3000/monitors'; // URL de tu API
+  private apiUrl = 'http://localhost:8000/monitors'; // URL de tu API
 
   constructor(private http: HttpClient) { }
 

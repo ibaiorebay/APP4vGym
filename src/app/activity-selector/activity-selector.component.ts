@@ -5,6 +5,8 @@ import { activityService } from '../services/activity.service';
 import { MonitorService } from '../services/monitor.service'; // Importamos el MonitorService
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivityDialogComponent } from '../activity-dialog/activity-dialog.component';
 
 @Component({
   selector: 'app-activity-selector',
@@ -29,7 +31,8 @@ export class ActivitySelectorComponent implements OnInit {
   constructor(
     private dateService: DateService,
     private activityService: activityService,   // Inyectamos el ActivityService
-    private monitorService: MonitorService     // Inyectamos el MonitorService
+    private monitorService: MonitorService,     // Inyectamos el MonitorService
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -73,6 +76,35 @@ export class ActivitySelectorComponent implements OnInit {
         this.loadActivitySlots(this.dateService.getSelectedDate()); // Recargar actividades después de eliminar
       });
     }
+  }
+
+  openCreateActivityModal(): void {
+    const dialogRef = this.dialog.open(ActivityDialogComponent, {
+      width: '400px',
+      data: { title: 'Crear Actividad' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Actividad creada:', result);
+        // Aquí puedes manejar la lógica para guardar la nueva actividad
+      }
+    });
+  }
+
+  // 🔹 Método para abrir el modal al EDITAR una actividad existente
+  openEditActivityModal(activity: any): void {
+    const dialogRef = this.dialog.open(ActivityDialogComponent, {
+      width: '400px',
+      data: { title: 'Editar Actividad', activity }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log('Actividad editada:', result);
+        // Aquí puedes manejar la lógica para actualizar la actividad existente
+      }
+    });
   }
 
   onActivityTypeChange() {

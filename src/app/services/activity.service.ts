@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class activityService {
 
-  private apiUrl = 'http://localhost:3000'; // URL base de la API
+  private apiUrl = 'http://localhost:8000'; // URL base de la API
 
   constructor(private http: HttpClient) {}
 

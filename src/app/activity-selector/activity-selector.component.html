@@ -6,13 +6,15 @@
 
 <div class="schedule">
   <app-activity
-  *ngFor="let slot of activitySlots"
-  [slot]="slot"
-  (editActivity)="openModalForEditing($event)"
-  (deleteActivity)="deleteActivity($event)">
-</app-activity>
+    *ngFor="let slot of activitySlots"
+    [slot]="slot"
+    (editActivity)="openEditActivityModal($event)"
+    (createActivity)="openCreateActivityModal()"
+    (deleteActivity)="deleteActivity($event)">
+  </app-activity>
 </div>
 
+<!-- Modal -->
 <div *ngIf="isModalOpen" class="modal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">×</span>
@@ -33,7 +35,6 @@
     </div>
 
     <button (click)="saveActivity()">{{ isEditing ? 'Actualizar' : 'Crear' }}</button>
-    <button (click)="cancel()">Cancelar</button>
+    <button (click)="closeModal()">Cancelar</button>
   </div>
 </div>
-

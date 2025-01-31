@@ -1,28 +1,35 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivityComponentInterface } from '../interfaces/activity-component';
 
 @Component({
   selector: 'app-activity',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './activity.component.html',
-  styleUrl: './activity.component.scss'
+  styleUrls: ['./activity.component.scss']
 })
 export class ActivityComponent {
-  @Input() slot!: ActivityComponentInterface;
-  @Output() editActivity = new EventEmitter<any>();  // Evento para editar
-  @Output() deleteActivity = new EventEmitter<number>(); // Evento para eliminar
+  @Input() slot!: any;
+  @Output() editActivity = new EventEmitter<any>();
+  @Output() deleteActivity = new EventEmitter<number>();
+  @Output() createActivity = new EventEmitter<any>();
 
-  onEdit() {
-    if (this.slot.activity) {
-      this.editActivity.emit(this.slot.activity); // Emitimos la actividad completa
+  // Editar actividad existente
+  onEdit(): void {
+    this.editActivity.emit(this.slot.activity);
+  }
+
+  // Eliminar actividad
+  onDelete() {
+    if (this.slot.activity?.id) {
+      this.deleteActivity.emit(this.slot.activity.id);
     }
   }
 
-  onDelete() {
-    if (this.slot.activity?.id) {
-      this.deleteActivity.emit(this.slot.activity.id); // Emitimos el ID de la actividad
+  // Crear nueva actividad si el slot está vacío
+  onCreate() {
+    if (!this.slot.activity) {
+      this.createActivity.emit(this.slot);
     }
   }
 }

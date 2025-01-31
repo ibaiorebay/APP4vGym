@@ -1,9 +1,14 @@
-<div class="hour">{{ slot.activity?.dateStart?.slice(11, 16)}} - {{ slot.activity?.dateEnd?.slice(11, 16) }}</div>
+<!-- 📌 Siempre se muestra la hora, aunque no haya actividad -->
+<div class="hour">
+  {{ slot.activity?.dateStart?.slice(11, 16) || slot.startTime }} - 
+  {{ slot.activity?.dateEnd?.slice(11, 16) || slot.endTime }}
+</div>
+
 <div [ngClass]="{ 'free-slot': slot.isFree, 'activity-slot': !slot.isFree }" class="slot-container">
   <ng-container *ngIf="slot.isFree; else activityContent">
     <div class="free-content">
       <div class="free-text">FREE</div>
-      <button class="add-button">+</button>
+      <button class="add-button" (click)="onCreate()">+</button>
     </div>
   </ng-container>
 
@@ -25,4 +30,3 @@
     </div>
   </ng-template>
 </div>
-

@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<div mat-dialog-content>
+  <form>
+    <input type="text" placeholder="Nombre de la actividad" [(ngModel)]="newActivity.name" name="name" required />
+    <input type="text" placeholder="Ícono" [(ngModel)]="newActivity.icon" name="icon" required />
+    <input type="datetime-local" placeholder="Fecha de inicio" [(ngModel)]="newActivity.dateStart" name="dateStart" required />
+    <input type="datetime-local" placeholder="Fecha de fin" [(ngModel)]="newActivity.dateEnd" name="dateEnd" required />
+
+    <h3>Monitores</h3>
+    <div *ngFor="let monitor of newActivity.monitors; let i = index">
+      <input type="text" placeholder="Nombre del monitor" [(ngModel)]="monitor.name" name="monitorName{{ i }}" required />
+      <input type="text" placeholder="Foto URL" [(ngModel)]="monitor.photo" name="monitorPhoto{{ i }}" required />
+      <button type="button" mat-button color="warn" (click)="removeMonitor(i)">Eliminar</button>
+    </div>
+
+    <button type="button" mat-button color="primary" (click)="addMonitor()">Añadir Monitor</button>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="save()">Aceptar</button>
+</div>
