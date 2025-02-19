@@ -7,6 +7,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 To start a local development server, run:
 
 ```bash
+npm install
 npm update
 npm install primeng @primeng/themes
 ng add @angular/material
@@ -14,6 +15,12 @@ ng add @angular/material
 
 ```bash
 ng serve
+```
+
+To start the mock api, run:
+
+```bash
+node node gymMock/server.js
 ```
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
