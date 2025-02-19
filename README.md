@@ -9,7 +9,6 @@ To start a local development server, run:
 ```bash
 npm install
 npm update
-npm install primeng @primeng/themes
 ng add @angular/material
 ```
 
